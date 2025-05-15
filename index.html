@@ -151,7 +151,7 @@
               messages.appendChild(item);
               window.scrollTo(0, document.body.scrollHeight);
               socket.auth.serverOffset = serverOffset;
-              
+
               /*
               msgLine.textContent = '[' + msg.timestamp + '] ' + msg.nickname + ': ';
               messages.appendChild(msgLine);
@@ -163,7 +163,7 @@
             socket.on('user joined', (msg) => {
               const item = document.createElement('li');
 
-              item.textContent = '[' + timestamp + '] ' + msg.nickname + ': ' + msg.msg;
+              item.textContent = '[' + msg.timestamp + '] ' + msg.nickname + ': ' + msg.msg;
               messages.appendChild(item);
               window.scrollTo(0, document.body.scrollHeight);
             });
