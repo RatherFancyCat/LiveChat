@@ -65,12 +65,16 @@
             const messages = document.getElementById('messages');
             const disconnectButton = document.getElementById('disconnect-btn');
             
+            
+            /*timestamp has to be declared on every event to make sure correct local time variable is sent*/
+            function getCurrentTimestamp() {
             const d = new Date();
             let hour = d.getHours().toString().padStart(2, '0');;
             let minute = d.getMinutes().toString().padStart(2, '0');
-            let timestamp = hour + ':' + minute;
+            return `${hour}:${minute}`;
+            }
+
             let firstConn = 1;
-            
             let nickname = '';
             
             if (firstConn = 1) {
@@ -78,6 +82,7 @@
             }
 
             nickForm.addEventListener('submit', (e) => {
+              let timestamp = getCurrentTimestamp();
               e.preventDefault();
               if (nick.value.trim() != '') {
                 nickname = nick.value;
@@ -97,10 +102,7 @@
             form.addEventListener('submit', (e) => {
             e.preventDefault();
             if (input.value) {
-              const d = new Date();
-              let hour = d.getHours().toString().padStart(2, '0');;
-              let minute = d.getMinutes().toString().padStart(2, '0');
-              let timestamp = hour + ':' + minute;
+              let timestamp = getCurrentTimestamp();
 
               socket.emit('chat message', {
                 'msg':input.value,
@@ -112,6 +114,8 @@
             });
 
             window.addEventListener("beforeunload", (e) => {
+              let timestamp = getCurrentTimestamp();
+
               socket.emit('close chat', {
                   'nickname':nick.value,
                   'timestamp':timestamp,
@@ -119,6 +123,8 @@
             });
 
             disconnectButton.addEventListener('click', (e) => {
+              let timestamp = getCurrentTimestamp();
+              
               e.preventDefault();
               if (socket.connected) {
                 disconnectButton.innerText = 'Connect';

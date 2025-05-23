@@ -54,6 +54,7 @@ async function main() {
       });
 
       socket.on('chat message', async (msg) => {
+        /*
         let result;
         try {
           // store the message in the database
@@ -62,8 +63,8 @@ async function main() {
           // TODO handle the failure
           return;
         }
-
-        io.emit('chat message', msg, result.lastID);
+        */
+        io.emit('chat message', msg/*, result.lastID*/);
         console.log('User ' + msg.nickname + ' sent message: ' + msg.msg + ' @ ' + msg.timestamp);
       });
 
